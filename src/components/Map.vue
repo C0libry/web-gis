@@ -49,11 +49,6 @@ const { execute: searchRequest, isFetching, error, data: geoJSONdata } = useFetc
 onMounted(() => {
   MapStore.map = L.map(mapContainer.value).setView(SEVASTOPOL, 10);
 
-  yandexSatellite = L.tileLayer('https://core-sat.maps.yandex.net/tiles?l=sat&v=3.1025.0&x={x}&y={y}&z={z}&scale=1&lang=ru_RU', {
-    maxZoom: 19,
-  });
-  yandexSatellite.addTo(MapStore.map);
-
   yandexMap = L.tileLayer(
     'https://core-renderer-tiles.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}&scale=1&lang=ru_RU', {
     maxZoom: 21,
@@ -107,7 +102,6 @@ onMounted(() => {
 
 
   let baseMaps = {
-    // "Яндекс спутнкиовая карта": yandexSatellite,
     "Яндекс карта": yandexMap,
   };
 
