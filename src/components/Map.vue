@@ -83,23 +83,23 @@ onMounted(() => {
   //   //   elem.bindPopup(feature.properties.NAME)}
   // });
 
-  let pointOfInterest = L.geoJSON(MapStore.pointOfInterest, {
-    style: {
-      opacity: 0.5,
-      fillOpacity: 0.1
-    },
-    onEachFeature: function (feature, elem) {
-      let popupData = ""
-      for (let key in feature.properties) {
-        let value = feature.properties[key];
-        if (value !== "" && value !== null && key != 'NAME_EN' && key != 'NAME_RU' && key != 'OSM_TYPE' && key != 'OSM_ID') {
-          popupData += key + ": " + value + ", ";
-        }
-      }
-      elem.bindPopup(popupData)
-    }
-  })
-    .addTo(MapStore.map);
+  // let pointOfInterest = L.geoJSON(MapStore.pointOfInterest, {
+  //   style: {
+  //     opacity: 0.5,
+  //     fillOpacity: 0.1
+  //   },
+  //   onEachFeature: function (feature, elem) {
+  //     let popupData = ""
+  //     for (let key in feature.properties) {
+  //       let value = feature.properties[key];
+  //       if (value !== "" && value !== null && key != 'NAME_EN' && key != 'NAME_RU' && key != 'OSM_TYPE' && key != 'OSM_ID') {
+  //         popupData += key + ": " + value + ", ";
+  //       }
+  //     }
+  //     elem.bindPopup(popupData)
+  //   }
+  // })
+  //   .addTo(MapStore.map);
 
   let shop = addLayer(MapStore.pointOfInterest.features.filter(d => d.properties.SHOP != null), "#806491");
   let sport = addLayer(MapStore.pointOfInterest.features.filter(d => d.properties.SPORT != null), "#8ed2b9");
