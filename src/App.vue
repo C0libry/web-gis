@@ -1,16 +1,25 @@
 <script setup>
-import Map from './components/Map.vue'
+import { ref } from 'vue';
+import Map from './components/Map.vue';
+import Search from './components/Search.vue';
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <Map msg="You did it!" />
-    </div>
-  </header>
+  <!-- <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="25" height="25" />
+    <nav class="nav-bar">
+      <a href="">Map</a>
+      <a href="">About</a>
+      <a href=""></a>
+      <a href=""></a>
+    </nav>
+  </header> -->
 
   <main>
-    <TheWelcome />
+    <section class="wrapper">
+      <Search />
+      <Map msg="You did it!" />
+    </section>
   </main>
 </template>
 
