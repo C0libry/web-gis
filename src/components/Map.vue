@@ -72,16 +72,16 @@ onMounted(() => {
   // var point = L.marker([44.596972, 33.526402], {draggable: true}).addTo(MapStore.map).rempm;
   // point.remove();
 
-  let boundary = L.geoJSON(MapStore.boundaryPolygon, {
-    style: {
-      color: "#ff7800",
-      opacity: 0.5,
-      fillOpacity: 0
-    },
-    // onEachFeature: function(feature, elem){
-    //   console.log(feature.properties.NAME)
-    //   elem.bindPopup(feature.properties.NAME)}
-  });
+  // let boundary = L.geoJSON(MapStore.boundaryPolygon, {
+  //   style: {
+  //     color: "#ff7800",
+  //     opacity: 0.5,
+  //     fillOpacity: 0
+  //   },
+  //   // onEachFeature: function(feature, elem){
+  //   //   console.log(feature.properties.NAME)
+  //   //   elem.bindPopup(feature.properties.NAME)}
+  // });
 
   // let pointOfInterest = L.geoJSON(MapStore.pointOfInterest, {
   //   style: {
@@ -180,7 +180,7 @@ onMounted(() => {
   };
 
   let overlayMaps = {
-    "Полигон границ": L.layerGroup([boundary]),
+    // "Полигон границ": L.layerGroup([boundary]),
     // "Точки интереса": L.layerGroup([pointOfInterest]),
     "Магазины": L.layerGroup([shop]),
     "Спорт": L.layerGroup([sport]),
@@ -190,16 +190,16 @@ onMounted(() => {
   let layerControl = L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(MapStore.map);
 });
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      lat.value = position.coords.latitude;
-      lng.value = position.coords.longitude;
-      MapStore.map.setView([lat.value, lng.value], 13);
-      L.marker([lat.value, lng.value]).addTo(MapStore.map);
-    });
-  }
-}
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition((position) => {
+//       lat.value = position.coords.latitude;
+//       lng.value = position.coords.longitude;
+//       MapStore.map.setView([lat.value, lng.value], 13);
+//       L.marker([lat.value, lng.value]).addTo(MapStore.map);
+//     });
+//   }
+// }
 </script>
 
 <template>
