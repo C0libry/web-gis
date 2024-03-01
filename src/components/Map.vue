@@ -62,7 +62,7 @@ onMounted(() => {
     attribution: '&copy; <a href="http://www.yandex.ru">Яндекс</a>',
   });
   yandexMap.addTo(MapStore.map);
-  
+
   // EPSG3857 - defalt
   // EPSG3395 - yandex map
   MapStore.map.options.crs = L.CRS.EPSG3395;
@@ -83,27 +83,8 @@ onMounted(() => {
   //   //   elem.bindPopup(feature.properties.NAME)}
   // });
 
-  // let pointOfInterest = L.geoJSON(MapStore.pointOfInterest, {
-  //   style: {
-  //     opacity: 0.5,
-  //     fillOpacity: 0.1
-  //   },
-  //   onEachFeature: function (feature, elem) {
-  //     let popupData = ""
-  //     for (let key in feature.properties) {
-  //       let value = feature.properties[key];
-  //       if (value !== "" && value !== null && key != 'NAME_EN' && key != 'NAME_RU' && key != 'OSM_TYPE' && key != 'OSM_ID') {
-  //         popupData += key + ": " + value + ", ";
-  //       }
-  //     }
-  //     elem.bindPopup(popupData)
-  //   }
-  // })
-  //   .addTo(MapStore.map);
-
-  let shop = L.geoJSON(MapStore.pointOfInterest.features.filter(d => d.properties.SHOP != null), {
+  let pointOfInterest = L.geoJSON(MapStore.pointOfInterest, {
     style: {
-      color: "#806491",
       opacity: 0.5,
       fillOpacity: 0.1
     },
@@ -117,61 +98,14 @@ onMounted(() => {
       }
       elem.bindPopup(popupData)
     }
-  });
+  })
+    .addTo(MapStore.map);
 
-  let sport = L.geoJSON(MapStore.pointOfInterest.features.filter(d => d.properties.SPORT != null), {
-    style: {
-      color: "#8ed2b9",
-      opacity: 0.5,
-      fillOpacity: 0.1
-    },
-    onEachFeature: function (feature, elem) {
-      let popupData = ""
-      for (let key in feature.properties) {
-        let value = feature.properties[key];
-        if (value !== "" && value !== null && key != 'NAME_EN' && key != 'NAME_RU' && key != 'OSM_TYPE' && key != 'OSM_ID') {
-          popupData += key + ": " + value + ", ";
-        }
-      }
-      elem.bindPopup(popupData)
-    }
-  });
+  let shop = addLayer(MapStore.pointOfInterest.features.filter(d => d.properties.SHOP != null), "#806491");
+  let sport = addLayer(MapStore.pointOfInterest.features.filter(d => d.properties.SPORT != null), "#8ed2b9");
+  let leisure = addLayer(MapStore.pointOfInterest.features.filter(d => d.properties.LEISURE != null), "#EDC5AB");
+  let tourism = addLayer(MapStore.pointOfInterest.features.filter(d => d.properties.TOURISM != null), "#c3b21e");
 
-  let leisure = L.geoJSON(MapStore.pointOfInterest.features.filter(d => d.properties.LEISURE != null), {
-    style: {
-      color: "#EDC5AB",
-      opacity: 0.5,
-      fillOpacity: 0.1
-    },
-    onEachFeature: function (feature, elem) {
-      let popupData = ""
-      for (let key in feature.properties) {
-        let value = feature.properties[key];
-        if (value !== "" && value !== null && key != 'NAME_EN' && key != 'NAME_RU' && key != 'OSM_TYPE' && key != 'OSM_ID') {
-          popupData += key + ": " + value + ", ";
-        }
-      }
-      elem.bindPopup(popupData)
-    }
-  });
-
-  let tourism = L.geoJSON(MapStore.pointOfInterest.features.filter(d => d.properties.TOURISM != null), {
-    style: {
-      color: "#c3b21e",
-      opacity: 0.5,
-      fillOpacity: 0.1
-    },
-    onEachFeature: function (feature, elem) {
-      let popupData = ""
-      for (let key in feature.properties) {
-        let value = feature.properties[key];
-        if (value !== "" && value !== null && key != 'NAME_EN' && key != 'NAME_RU' && key != 'OSM_TYPE' && key != 'OSM_ID') {
-          popupData += key + ": " + value + ", ";
-        }
-      }
-      elem.bindPopup(popupData)
-    }
-  });
 
   let baseMaps = {
     "Яндекс спутнкиовая карта": yandexSatellite,
@@ -189,6 +123,26 @@ onMounted(() => {
   };
   let layerControl = L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(MapStore.map);
 });
+
+function addLayer(_filter, _color) {
+  return L.geoJSON(_filter, {
+    style: {
+      color: _color,//#806491
+      opacity: 0.5,
+      fillOpacity: 0.1
+    },
+    onEachFeature: function (feature, elem) {
+      let popupData = ""
+      for (let key in feature.properties) {
+        let value = feature.properties[key];
+        if (value !== "" && value !== null && key != 'NAME_EN' && key != 'NAME_RU' && key != 'OSM_TYPE' && key != 'OSM_ID') {
+          popupData += key + ": " + value + "<br>";
+        }
+      }
+      elem.bindPopup(popupData)
+    }
+  });
+}
 
 // function getLocation() {
 //   if (navigator.geolocation) {
