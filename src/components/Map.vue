@@ -176,7 +176,7 @@ onMounted(() => {
   let baseMaps = {
     "Яндекс спутнкиовая карта": yandexSatellite,
     "Яндекс карта": yandexMap,
-    "Google": googleStreets,
+    // "Google": googleStreets,
   };
 
   let overlayMaps = {
