@@ -15,7 +15,6 @@ const MapStore = useMapStore();
 
 const lat = ref();
 const lng = ref();
-const map = ref();
 const mapContainer = ref();
 
 let yandexSatellite;
@@ -108,9 +107,8 @@ onMounted(() => {
 
 
   let baseMaps = {
-    "Яндекс спутнкиовая карта": yandexSatellite,
+    // "Яндекс спутнкиовая карта": yandexSatellite,
     "Яндекс карта": yandexMap,
-    // "Google": googleStreets,
   };
 
   let overlayMaps = {
